@@ -94,6 +94,7 @@ public class Day5 {
     public static void executePartTwo(List<String> ranges, List<String> ids) {
         List<Long> validIds = new ArrayList<>();
         int validCount = 0;
+        Long amountOfValidKeysInRange = 0l;
 
         //fyll hashmap med ranges
         for (String s : ranges) {
@@ -104,22 +105,12 @@ public class Day5 {
             rangeMerge(first, last);
         }
 
-        // check ids
-        for (String id : ids) {
-            Long intId = Long.parseLong(id);
-            for (Map.Entry<Long, Long> entry : hm.entrySet()) {
-                Long first = entry.getKey();
-                Long last = entry.getValue();
+        for (Map.Entry<Long, Long> entry : hm.entrySet()) {
 
-                if (intId >= first && intId <= last) {
-                    validIds.add(intId);
-                    validCount += intId;
-
-                }
-            }
+            amountOfValidKeysInRange += (entry.getValue() - entry.getKey() + 1);
 
         }
-        System.out.println(validIds.size());
+        System.out.println(amountOfValidKeysInRange);
     }
 
 }
